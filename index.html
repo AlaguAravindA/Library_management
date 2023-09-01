@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<style >
+  
+  body{
+    margin: 0;
+    background-image: url("library.jpg");
+    background-repeat : no-repeat;  /*no repeat*/
+    background-size: cover ;/*cover the entire screen */
+    backdrop-filter: brightness(20%);
+    height: 100vh;
+    
+  }
+ 
+.container
+{
+    border: 2px solid black;
+    border-radius: 20px;
+    box-shadow: 10px 10px 10px;
+}
+.inputform input, select{
+  background: #262626c7;
+  margin-top: 20px;
+  border: 0;
+  width: 100%;
+  height: 48px;
+  padding-left: 8px;
+  color: aliceblue;
+  outline: none;
+  border-radius: 18px;
+  
+}
+</style>
+<body class="bg-dark-subtle" >
+  <br>
+
+
+    <div class="container  bg-light " style="width: 520px; height: 750px;">
+    <h1><i>Personal library</i></h1>
+
+<div class="inputform">
+  <label for="title">
+    Title : 
+  </label>
+  <input  type="text" id="title" placeholder="Title of the book" style="width: 100%"> <br>
+  <label for="author">
+   Author:
+  </label>
+  <input  type="text " id="author" placeholder="author of the book" style="width: 100%"> <br>
+  <label for="year">
+    Year: 
+  </label>
+  <input  type="text" id="year" placeholder="Year published" style="width: 100%"><br>
+  <br>
+  
+  <label for="status">Did you finished reading<br></label>
+  <select name="sts" id="status"  style="width: 100%">
+    <option value="Yes">Yes</option>
+    <option value="No">No</option>
+  </select><br><br>
+</div>
+    <button class="btn btn-success mt-3" type="submit" id="sumbit" >addbook</button>
+    <button class="btn btn-success mt-3" type="submit" id="addfront">addBookToFront</button> <br>
+    <button class="btn btn-danger mt-3" type="sunbit" id="removefront">Remove the book from Front</button> <br> 
+    <button class="btn btn-danger mt-3" type="sunbit" id="removelast">Remove the book from Last</button> <br>
+   
+    <button type="button" onclick="getBookbyReadstatus()"  id="result2" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#result1" >
+     Search by read status
+
+  </button>
+  <button type="button" onclick="getbookbyyear()"  id="result3" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#result1" >
+    Enter the year
+
+</button>
+<button type="button" onclick="getSublibrary()"  id="result3" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#result1" >
+  Get Sub-library
+
+</button>
+        
+ 
+
+      <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal" id="Onlytitle">
+        Only title
+      </button>
+      
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="title">ONLY Titles</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="titles">
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- author -->
+    
+    <button type="button" onclick="getbooksbyauthor()"  id="author" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#author_book" >
+        Search by author
+
+    </button>
+
+    
+      
+      <!-- Modal -->
+      <div class="modal fade" id="author_book" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="author1">Results</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="Author">
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Readstatus -->
+    <div class="modal fade" id="result1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="result">  </h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="results">
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+<div class="alert alert-success" role="alert" id="ale" hidden>
+        <p id="message"> </p>
+       </div>
+   
+</body>
+<script src="lib.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</html>
